@@ -63,7 +63,8 @@ static Pixel[][] pixels;
 		//   Then, use drawRect to add a grid pattern to your display.
 		for(int i = 0; i < pixels.length; i++) {
 			for(int j = 0; j < pixels[i].length; j++) {
-		pixels[i][j].fill(color);
+		g.setColor(pixels[i][j].color);
+		g.drawRect(rows, cols, pixelWidth, pixelHeight);
 		}
 		}
 	}
