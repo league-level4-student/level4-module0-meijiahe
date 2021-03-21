@@ -61,6 +61,10 @@ static Pixel[][] pixels;
 		//4. Iterate through the array.
 		//   For every pixel in the list, fill in a rectangle using the pixel's color.
 		//   Then, use drawRect to add a grid pattern to your display.
-		
+		for(int i = 0; i < pixels.length; i++) {
+			for(int j = 0; j < pixels[i].length; j++) {
+		pixels[i][j].fill(color);
+		}
+		}
 	}
 }
