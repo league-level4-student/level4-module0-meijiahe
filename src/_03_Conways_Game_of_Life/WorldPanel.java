@@ -40,7 +40,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		//   passing in the location.
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {
-				cells[i][j] = cells [cellSize][cellSize];
+				cells[i][j] = new Cell (i,j,cellSize);
 			}
 		}
 	}
@@ -101,7 +101,8 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {
-				cells[i][j].getLivingNeighbors(livingNeighbors);
+				livingNeighbors[i][j]=getLivingNeighbors(i,j);
+				cells[i][j].liveOrDie(livingNeighbors[i][j]);
 			}
 		}
 		//8. check if each cell should live or die
@@ -110,6 +111,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		
 		
 		repaint();
+		
 	}
 	
 	//9. Complete the method.
@@ -117,7 +119,32 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	//   living neighbors there are of the 
 	//   cell identified by x and y
 	public int getLivingNeighbors(int x, int y){
-		return 0;
+		int count=0;
+		if(cells[x+1][y].isAlive) {
+			count++;
+		}
+		if(cells[x-1][y].isAlive) {
+			count++;
+		}
+		if(cells[x][y+1].isAlive) {
+			count++;
+		}
+		if(cells[x][y-1].isAlive) {
+			count++;
+		}
+		if(cells[x+1][y+1].isAlive) {
+			count++;
+		}
+		if(cells[x+1][y-1].isAlive) {
+			count++;
+		}
+		if(cells[x-1][y+1].isAlive) {
+			count++;
+		}
+		if(cells[x-1][y-1].isAlive) {
+			count++;
+		}
+		return count;
 	}
 
 	@Override
@@ -142,8 +169,12 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		//10. Use e.getX() and e.getY() to determine
 		//    which cell is clicked. Then toggle
 		//    the isAlive variable for that cell.
-		
-		
+		int x=e.getX()/cellSize;
+		int y=e.getY()/cellSize;
+		if(x<cells.length&&y<cells.length) {
+			cells[x][y].isAlive= !cells[x][y].isAlive;
+		}
+	
 		
 		
 		repaint();
