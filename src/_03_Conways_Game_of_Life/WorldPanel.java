@@ -34,7 +34,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		cellSize = w/cpr;
 		
 		//3. Initialize the cell array to the appropriate size.
-		cells= new Cell [cellSize][cellSize];
+		cells= new Cell [cellsPerRow][cellsPerRow];
 		//3. Iterate through the array and initialize each cell.
 		//   Don't forget to consider the cell's dimensions when 
 		//   passing in the location.
@@ -120,28 +120,28 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	//   cell identified by x and y
 	public int getLivingNeighbors(int x, int y){
 		int count=0;
-		if(cells[x+1][y].isAlive) {
+		if(x+1<cells.length&&cells[x+1][y].isAlive) {
 			count++;
 		}
-		if(cells[x-1][y].isAlive) {
+		if(x-1>=0&&cells[x-1][y].isAlive) {
 			count++;
 		}
-		if(cells[x][y+1].isAlive) {
+		if(y+1<cells.length&&cells[x][y+1].isAlive) {
 			count++;
 		}
-		if(cells[x][y-1].isAlive) {
+		if(y-1>=0&&cells[x][y-1].isAlive) {
 			count++;
 		}
-		if(cells[x+1][y+1].isAlive) {
+		if(x+1<cells.length&&y+1<cells.length&&cells[x+1][y+1].isAlive) {
 			count++;
 		}
-		if(cells[x+1][y-1].isAlive) {
+		if(x+1<cells.length&&y-1>=0&&cells[x+1][y-1].isAlive) {
 			count++;
 		}
-		if(cells[x-1][y+1].isAlive) {
+		if(x-1>=0&&y+1<cells.length&&cells[x-1][y+1].isAlive) {
 			count++;
 		}
-		if(cells[x-1][y-1].isAlive) {
+		if(x-1>=0&&y-1>=0&&cells[x-1][y-1].isAlive) {
 			count++;
 		}
 		return count;
