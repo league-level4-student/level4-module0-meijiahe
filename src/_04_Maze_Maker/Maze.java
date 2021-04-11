@@ -24,12 +24,16 @@ for(int i = 0; i < cells.length; i++) {
 
 	//4. This method iterates through the cells and draws them
 	public void draw(Graphics g) {
-		
+		for(int i = 0; i < cells.length; i++) {
+			for(int j = 0; j < cells[i].length; j++) {
+			 cells[i][j].draw(g);
+			}
+		}
 	}
 	
 	//4b. This method returns the selected cell.
 	public Cell getCell(int x, int y){
-		return  null;
+		return  cells[x][y];
 	}
 
 	public int getWidth() {
