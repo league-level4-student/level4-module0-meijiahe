@@ -33,22 +33,25 @@ public class MazeMaker{
 	//6. Complete the selectNextPathMethod
 	private static void selectNextPath(Cell currentCell) {
 		//A. mark cell as visited
-		currentCell.hasBeenVisited();
+		currentCell.setBeenVisited(true);
+		
 		//B. Get an ArrayList of unvisited neighbors using the current cell and the method below
-		
+		ArrayList <Cell> unvisitneighbor =getUnvisitedNeighbors(currentCell);
 		//C. if has unvisited neighbors,
-		
+		if(unvisitneighbor.size()!=0) {
 			//C1. select one at random.
-			
+			Random rand=new Random();
+			int random =rand.nextInt(unvisitneighbor.size());
+			Cell neighbr=unvisitneighbor.get(random);
 			//C2. push it to the stack
-		
+		uncheckedCells.push(neighbr);
 			//C3. remove the wall between the two cells
 
 			//C4. make the new cell the current cell and mark it as visited
 		
 			//C5. call the selectNextPath method with the current cell
 			
-			
+		}
 		//D. if all neighbors are visited
 		
 			//D1. if the stack is not empty
