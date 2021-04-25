@@ -46,14 +46,29 @@ public class MazeMaker{
 			//C2. push it to the stack
 		uncheckedCells.push(neighbr);
 			//C3. remove the wall between the two cells
-
+				if(currentCell.hasNorthWall()) {
+					neighbr.setNorthWall(false);
+				}
+				if(currentCell.hasSouthWall()) {
+					neighbr.setSouthWall(false);
+				}
+				if(currentCell.hasEastWall()) {
+					neighbr.setEastWall(false);
+				}
+				if(currentCell.hasWestWall()) {
+					neighbr.setWestWall(false);
+				}
 			//C4. make the new cell the current cell and mark it as visited
-		
+		neighbr = currentCell;
+		currentCell.setBeenVisited(true);
+				
 			//C5. call the selectNextPath method with the current cell
-			
+			selectNextPath(currentCell);
 		}
 		//D. if all neighbors are visited
-		
+		else {
+			
+		}
 			//D1. if the stack is not empty
 			
 				// D1a. pop a cell from the stack
