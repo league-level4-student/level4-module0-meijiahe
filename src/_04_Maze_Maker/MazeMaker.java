@@ -59,7 +59,7 @@ public class MazeMaker{
 					neighbr.setWestWall(false);
 				}
 			//C4. make the new cell the current cell and mark it as visited
-		neighbr = currentCell;
+		 currentCell = neighbr;
 		currentCell.setBeenVisited(true);
 				
 			//C5. call the selectNextPath method with the current cell
@@ -67,12 +67,15 @@ public class MazeMaker{
 		}
 		//D. if all neighbors are visited
 		else {
-			
+			if(uncheckedCells.isEmpty()==false) {
+				currentCell=uncheckedCells.pop();
+				selectNextPath(currentCell);
+			}
 		}
 			//D1. if the stack is not empty
 			
 				// D1a. pop a cell from the stack
-		
+						
 				// D1b. make that the current cell
 		
 				// D1c. call the selectNextPath method with the current cell
@@ -85,13 +88,39 @@ public class MazeMaker{
 	//   This method will check if c1 and c2 are adjacent.
 	//   If they are, the walls between them are removed.
 	private static void removeWalls(Cell c1, Cell c2) {
-		
+		if(c1.getX()>=c2.getX()) {
+			c1.setWestWall(false);
+			c2.setEastWall(false);
+		}
+		if(c1.getX()<=c2.getX()) {
+			c2.setWestWall(false);
+			c1.setEastWall(false);
+		}
+		if(c1.hasEastWall()) {
+			c2.setEastWall(false);
+		}
+		if(c1.hasWestWall()) {
+			c2.setWestWall(false);
+		}
 	}
 	
 	//8. Complete the getUnvisitedNeighbors method
 	//   Any unvisited neighbor of the passed in cell gets added
 	//   to the ArrayList
 	private static ArrayList<Cell> getUnvisitedNeighbors(Cell c) {
-		return null;
+		ArrayList<Cell> getunvisitNeighbor=new ArrayList<Cell> ();
+		if(c.getX()-1>=0&&maze.cells[c.getX()-1][c.getY()].hasBeenVisited()==false) {
+			getunvisitNeighbor.add(maze.cells[c.getX()-1][c.getY()]);
+		}
+		if(c.getX()+1<maze.cells.length&&maze.cells[c.getX()+1][c.getY()].hasBeenVisited()==false) {
+			getunvisitNeighbor.add(maze.cells[c.getX()+1][c.getY()]);
+		}
+		if(c.getY()-1>=0&&maze.cells[c.getX()][c.getY()-1].hasBeenVisited()==false) {
+			getunvisitNeighbor.add(maze.cells[c.getX()][c.getY()-1]);
+		}
+		if(c.getY()+1<maze.cells.length&&maze.cells[c.getX()][c.getY()+1].hasBeenVisited()==false) {
+			getunvisitNeighbor.add(maze.cells[c.getX()][c.getY()+1]);
+		}
+		return getunvisitNeighbor;
 	}
 }
