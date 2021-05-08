@@ -46,18 +46,7 @@ public class MazeMaker{
 			//C2. push it to the stack
 		uncheckedCells.push(neighbr);
 			//C3. remove the wall between the two cells
-				if(currentCell.hasNorthWall()) {
-					neighbr.setNorthWall(false);
-				}
-				if(currentCell.hasSouthWall()) {
-					neighbr.setSouthWall(false);
-				}
-				if(currentCell.hasEastWall()) {
-					neighbr.setEastWall(false);
-				}
-				if(currentCell.hasWestWall()) {
-					neighbr.setWestWall(false);
-				}
+				removeWalls(currentCell,neighbr);
 			//C4. make the new cell the current cell and mark it as visited
 		 currentCell = neighbr;
 		currentCell.setBeenVisited(true);
@@ -88,19 +77,21 @@ public class MazeMaker{
 	//   This method will check if c1 and c2 are adjacent.
 	//   If they are, the walls between them are removed.
 	private static void removeWalls(Cell c1, Cell c2) {
-		if(c1.getX()>=c2.getX()) {
+		if(c1.getX()>c2.getX()) {
 			c1.setWestWall(false);
 			c2.setEastWall(false);
 		}
-		if(c1.getX()<=c2.getX()) {
+		if(c1.getX()<c2.getX()) {
 			c2.setWestWall(false);
 			c1.setEastWall(false);
 		}
-		if(c1.hasEastWall()) {
-			c2.setEastWall(false);
+		if(c1.getY()<c2.getY()) {
+			c1.setSouthWall(false);
+			c2.setNorthWall(false);
 		}
-		if(c1.hasWestWall()) {
-			c2.setWestWall(false);
+		if(c1.getY()>c2.getY()) {
+			c2.setSouthWall(false);
+			c1.setNorthWall(false);
 		}
 	}
 	
